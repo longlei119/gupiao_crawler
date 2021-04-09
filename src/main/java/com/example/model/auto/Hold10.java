@@ -3,6 +3,8 @@ package com.example.model.auto;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -28,7 +30,7 @@ public class Hold10 extends Model {
 
     private LocalDateTime createTime;
 
-    private LocalDate deliveryDate;
+    private Date deliveryDate;
 
     private String holdNum;
 

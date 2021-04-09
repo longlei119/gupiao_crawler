@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -49,11 +51,13 @@ public class Hold10Controller {
         Document html= null;
         try {
             html = getHtmlFromUrl(url, true);
-            Elements li = html.select("#bd_1").select("li");
-            System.out.println("years:"+li);
+            Elements years = html.select("#bd_1").select("li");
+            List<String> yearList= new ArrayList<>();
+            for (Element year : years) {
+                yearList.add(year.text());
+            }
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Elements select = html.select("table.m_table.m_hl.ggintro");
-            //System.out.println("爬取数据：");
-            //System.out.println(select);
             int k=0;
             List<Hold10> dataList= new ArrayList<>();
             for(Element el:select){
@@ -61,11 +65,10 @@ public class Hold10Controller {
                 if(caption.indexOf("前十大流通股东累计持有")>-1){
                     Hold10 hold10 = new Hold10();
                     hold10.setId(UUID.randomUUID().toString());
+                    hold10.setCreateTime(LocalDateTime.now());
+                    hold10.setDeliveryDate(sdf.parse(yearList.get(k)));
                     Elements body = el.select("tbody");
                     Elements th2 = body.select("th");
-
-                    System.out.println("hangshuju:"+el);
-
                     Elements th = body.select("td");
                     hold10.setHoldName(th2.get(0).text());//设置十大流通股东姓名
                     hold10.setHoldNum(th.get(0).text());//设置持股数量
