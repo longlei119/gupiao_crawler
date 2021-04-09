@@ -142,4 +142,14 @@ public class Hold10Controller {
             }
         }
     }
+
+    public static void main(String[] args) throws Exception {
+        Document htmlFromUrl = getHtmlFromUrl("http://data.10jqka.com.cn/financial/yjyg/", true);
+        String url2="http://data.10jqka.com.cn/ajax/yjyg/date/2021-03-31/board/ALL/field/enddate/order/desc/page/4/ajax/1/free/1/";
+        System.out.println(htmlFromUrl);
+    }
+
+    public static void getStockNotice(){
+
+    }
 }
