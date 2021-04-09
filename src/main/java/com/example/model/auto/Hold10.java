@@ -26,6 +26,10 @@ public class Hold10 extends Model {
 
     private String id;
 
+    private String stockName;
+
+    private String stockNum;
+
     private String holdName;
 
     private LocalDateTime createTime;

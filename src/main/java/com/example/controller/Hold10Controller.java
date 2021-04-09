@@ -58,41 +58,43 @@ public class Hold10Controller {
             }
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Elements select = html.select("table.m_table.m_hl.ggintro");
+            System.out.println("select:"+select);
             int k=0;
             List<Hold10> dataList= new ArrayList<>();
             for(Element el:select){
                 String caption = el.select("caption").text();
                 if(caption.indexOf("前十大流通股东累计持有")>-1){
-                    Hold10 hold10 = new Hold10();
-                    hold10.setId(UUID.randomUUID().toString());
-                    hold10.setCreateTime(LocalDateTime.now());
-                    hold10.setDeliveryDate(sdf.parse(yearList.get(k)));
-                    Elements body = el.select("tbody");
-                    Elements th2 = body.select("th");
-                    Elements th = body.select("td");
-                    hold10.setHoldName(th2.get(0).text());//设置十大流通股东姓名
-                    hold10.setHoldNum(th.get(0).text());//设置持股数量
-                    //设置持股变化数量
-                    String text = th.get(1).text();
-                    String text3 = th.get(4).text();
-                    if("新进".equals(text) || "不变".equals(text)){
+
+                    Elements trs = el.select("tbody").select("tr");
+
+                    for (Element tr : trs) {
+                        Hold10 hold10 = new Hold10();
+                        hold10.setId(UUID.randomUUID().toString());
+                        hold10.setCreateTime(LocalDateTime.now());
+                        hold10.setDeliveryDate(sdf.parse(yearList.get(k)));
+                        System.out.println("tr:"+tr);
+                        Elements th2 = tr.select("th");
+                        Elements th = tr.select("td");
+
+                        System.out.println("th2:"+th2);
+                        System.out.println("th:"+th);
+                        hold10.setHoldName(th2.get(0).text());//设置十大流通股东姓名
+                        if(th.size()==0){
+                            continue;
+                        }
+                        hold10.setHoldNum(th.get(0).text());//设置持股数量
+                        //设置持股变化数量
+                        String text = th.get(1).text();
+                        String text3 = th.get(4).text();
                         hold10.setHoldNumChange(text);
                         hold10.setHoldChangRate(text3);
-                    }else{
-                        String s = th.select("s").html();
-                        if(s.indexOf("up")>-1){
-                            hold10.setHoldNumChange("+"+text);
-                            hold10.setHoldChangRate("+"+text3);
-                        }else{
-                            hold10.setHoldNumChange("-"+text);
-                            hold10.setHoldChangRate("-"+text3);
-                        }
 
+                        hold10.setHoldRate(th.get(2).text());
+                        hold10.setType(th.get(5).text());//设置股份类型
+                        dataList.add(hold10);
                     }
 
-                    hold10.setHoldRate(th.get(2).text());
-                    hold10.setType(th.get(5).text());//设置股份类型
-                    dataList.add(hold10);
+
                     k++;
 
                 }
@@ -107,6 +109,7 @@ public class Hold10Controller {
             return 0;
         }
     }
+
 
 
 
