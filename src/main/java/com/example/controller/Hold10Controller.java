@@ -2,6 +2,7 @@ package com.example.controller;
 
 
 import com.example.model.auto.Hold10;
+import com.example.model.auto.StockPreNotice;
 import com.example.service.IHold10Service;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -149,7 +150,8 @@ public class Hold10Controller {
         System.out.println(htmlFromUrl);
     }
 
-    public static void getStockNotice(){
+    public  static List<StockPreNotice> getStockNotice(){
+        return null;
 
     }
 }
