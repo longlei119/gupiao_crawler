@@ -8,12 +8,30 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/stock?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
     username: root
-    password: 8yGfpiSG50Ea62nM
+    password: root
+    #password: 8yGfpiSG50Ea62nM
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
     serialization:
       write-dates-as-timestamps: false
+    # redis
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      timeout: 20000
+      #    集群环境打开下面注释，单机不需要打开
+      #    cluster:
+      #      集群信息
+      #      nodes: xxx.xxx.xxx.xxx:xxxx,xxx.xxx.xxx.xxx:xxxx,xxx.xxx.xxx.xxx:xxxx
+      #      #默认值是5 一般当此值设置过大时，容易报：Too many Cluster redirections
+      #      maxRedirects: 3
+      pool:
+        max-active: 8
+        min-idle: 0
+        max-idle: 8
+        max-wait: -1
+      password:
 
 mybatis-plus:
   configuration:

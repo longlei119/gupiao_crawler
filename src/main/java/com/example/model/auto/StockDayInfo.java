@@ -1,35 +1,27 @@
 package com.example.model.auto;
 
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 股票业绩预告
+ * 股票每日信息
  * </p>
  *
  * @author astupidcoder
- * @since 2021-04-09
+ * @since 2021-04-10
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public class StockPreNotice extends Model {
+public class StockDayInfo extends Model {
 
     private static final long serialVersionUID = 1L;
 
     private String id;
-
-    /**
-     * 股票名称
-     */
-    private String stockName;
 
     /**
      * 股票编码
@@ -37,28 +29,40 @@ public class StockPreNotice extends Model {
     private String stockNum;
 
     /**
-     * 公告类型
+     * 股票名称
      */
-    private String noticeType;
+    private String stockName;
 
     /**
-     * 公告摘要
+     * 涨跌幅
      */
-    private String noticeSummary;
+    private String upDownRate;
 
     /**
-     * 净利润变动幅度
+     * 成交额
+     */
+    private Float dealMoney;
+
+    /**
+     * 量比
+     */
+    private String numRate;
+
+    /**
+     * 换手率
      */
     private String changeRate;
 
     /**
-     * 公告日期
+     * 市盈率
      */
-    private Date noticeDate;
+    private String syl;
 
     /**
-     * 创建时间
+     * 市净率
      */
+    private String sjl;
+
     private LocalDateTime createTime;
 
 

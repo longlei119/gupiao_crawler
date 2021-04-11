@@ -46,5 +46,10 @@ public class Hold10 extends Model {
 
     private String type;
 
+    /**
+     * 是否来自公告列表的股票
+     */
+    private Integer isFromNotice;
+
 
 }
